@@ -171,6 +171,17 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .sel-wrap:focus-within .sel-arr svg{stroke:var(--accent)}
 
 /* NUMBER INPUT */
+.auto-field{
+  display:flex;align-items:center;
+  min-height:48px;padding:0 16px 0 44px;
+  border:2px solid var(--border);border-radius:var(--rs);
+  background:var(--surface3);color:var(--text3);
+  font-size:15px;font-weight:700;font-family:'Plus Jakarta Sans',sans-serif;
+  position:relative;cursor:default;
+  transition:border-color var(--fast) var(--e),background var(--fast) var(--e);
+}
+.auto-field::before{content:'✦';position:absolute;left:14px;font-size:13px;color:var(--accent);opacity:.6}
+.auto-field.filled{border-color:var(--accent);background:var(--accent-lit);color:var(--text)}
 .num-wrap{position:relative}
 .num-sym{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:15px;font-weight:700;color:var(--text3);pointer-events:none;transition:color var(--fast) var(--e)}
 .num-wrap input[type=number]{width:100%;padding:13px 15px 13px 32px;border:1.5px solid var(--border);border-radius:var(--rs);font-family:'Plus Jakarta Sans',sans-serif;font-size:14.5px;font-weight:600;color:var(--text);background:var(--surface2);transition:all var(--fast) var(--e)}
@@ -565,40 +576,36 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
       </div>
 
       <div class="fld fg-full">
-        <label class="fld-lbl has-tip" for="fmv">
-          Fair Market Value (FMV) of the complete home
+        <span class="fld-lbl has-tip">
+          Fair Market Value (FMV)
           <span class="tip-icon">?</span>
-          <div class="tip-box"><strong>FMV</strong> is the price your home would sell for between a willing buyer and seller on the open market — including building, land, garage, and outbuildings. Exclude GST/HST and land transfer taxes.<br><br><strong>RC4028 program:</strong> FMV $350K–$450K = sliding scale reduction. FMV ≥ $450K = no federal rebate.<br><br><strong>Bill C-4 program:</strong> FMV up to $1M = full 5% rebate. $1M–$1.5M = partial. Over $1.5M = none.</div>
-        </label>
-        <span class="fld-hint">Building + land + outbuildings. Exclude GST/HST and land transfer taxes.</span>
-        <div class="num-wrap"><span class="num-sym">$</span><input type="number" id="fmv" min="0" step="1000" placeholder="e.g. 440,000"></div>
+          <div class="tip-box">Auto-set equal to your purchase price — the standard assumption for new builds. For RC4028: FMV $350K–$450K triggers a phase-out; FMV ≥ $450K = $0 federal rebate. For Bill C-4: FMV up to $1M = full rebate; $1M–$1.5M = partial.</div>
+        </span>
+        <span class="fld-hint">Auto-calculated from your purchase price</span>
+        <div class="auto-field" id="fmv-display">—</div>
+        <input type="hidden" id="fmv">
       </div>
 
       <div class="fld">
-        <label class="fld-lbl has-tip" for="gst">
+        <span class="fld-lbl has-tip">
           Total GST/HST paid
           <span class="tip-icon">?</span>
-          <div class="tip-box">Auto-calculated from your purchase price × rate. You can also enter the exact amount from your closing Statement of Adjustments or construction invoices. For HST provinces this is the <em>full</em> HST amount (federal + provincial combined).</div>
-        </label>
-        <span class="fld-hint" id="gst-hint">Auto-calculated — or enter exact amount from closing documents</span>
-        <div class="num-wrap"><span class="num-sym">$</span><input type="number" id="gst" min="0" step="100" placeholder="Auto-calculated" oninput="onGSTManual()"></div>
+          <div class="tip-box">Auto-calculated: purchase price × GST/HST rate for your province. Ontario = 13% HST, NS/NB/NL/PE = 15% HST, all others = 5% GST.</div>
+        </span>
+        <span class="fld-hint">Auto-calculated from price × province rate</span>
+        <div class="auto-field" id="gst-display">—</div>
+        <input type="hidden" id="gst">
       </div>
 
       <div class="fld">
-        <label class="fld-lbl has-tip" for="taxRate">
-          GST/HST rate applied
+        <span class="fld-lbl has-tip">
+          GST/HST rate
           <span class="tip-icon">?</span>
-          <div class="tip-box"><strong>5% GST</strong> — BC, AB, SK, MB, QC, territories.<br><br><strong>13% HST</strong> — Ontario (5% federal + 8% provincial).<br><br><strong>15% HST</strong> — NS, NB, NL, PE (5% federal + 10% provincial).<br><br>The calculator automatically extracts only the federal portion for rebate calculations.</div>
-        </label>
-        <span class="fld-hint">Auto-set by province — adjust only if your situation differs</span>
-        <div class="sel-wrap">
-          <select id="taxRate" onchange="autoGST()">
-            <option value="5">5% GST (BC, AB, SK, MB, QC, Territories)</option>
-            <option value="13">13% HST (Ontario)</option>
-            <option value="15">15% HST (NS, NB, NL, PE)</option>
-          </select>
-          <div class="sel-arr"><svg viewBox="0 0 16 16" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 6 8 10 12 6"/></svg></div>
-        </div>
+          <div class="tip-box"><strong>5% GST</strong> — BC, AB, SK, MB, QC, territories.<br><br><strong>13% HST</strong> — Ontario (5% federal + 8% provincial).<br><br><strong>15% HST</strong> — NS, NB, NL, PE (5% federal + 10% provincial).</div>
+        </span>
+        <span class="fld-hint">Set automatically by your province</span>
+        <div class="auto-field" id="rate-display">— (select province first)</div>
+        <input type="hidden" id="taxRate" value="5">
       </div>
 
       <div class="fld fg-full">
@@ -816,11 +823,11 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
       <div class="bkt-row has-tip" style="position:relative">
         <span class="bkt-lbl">RC4028 Federal GST/HST Rebate
           <span class="tip-icon" style="display:inline-flex;vertical-align:middle;margin-left:6px">?</span>
-          <div class="tip-box" style="bottom:auto;top:calc(100%+8px)">36% of federal GST/HST paid, capped at $6,300. Phase-out: FMV $350K–$450K sliding scale, $0 at $450K+. Available to all buyers. <strong>Current law — CRA Guide RC4028.</strong></div>
+          <div class="tip-box" style="bottom:auto;top:calc(100%+8px)">36% of federal GST/HST paid, capped at $6,300. Phase-out: FMV $350K–$450K sliding scale, $0 at $450K+. Available to all buyers. <strong>Current law — <a href="https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/rc4028.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">CRA Guide RC4028</a>.</strong></div>
         </span>
         <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
           <span class="bkt-val" id="bk-fed">$0</span>
-          <span style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ok);background:var(--ok-bg);border:1px solid var(--ok-b);padding:2px 8px;border-radius:10px">✅ Current Law</span>
+          <span style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ok);background:var(--ok-bg);border:1px solid var(--ok-b);padding:2px 8px;border-radius:10px">✅ <a href="https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/rc4028.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px">Current Law — RC4028</a></span>
         </div>
       </div>
 
@@ -844,7 +851,7 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
         </span>
         <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
           <span class="bkt-val" id="bk-on">$0</span>
-          <span style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ok);background:var(--ok-bg);border:1px solid var(--ok-b);padding:2px 8px;border-radius:10px" id="bk-prov-status-badge">✅ Current Law (ON)</span>
+          <span style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ok);background:var(--ok-bg);border:1px solid var(--ok-b);padding:2px 8px;border-radius:10px" id="bk-prov-status-badge">✅ <a href="https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/rc4028.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px">Current Law — RC4028</a></span>
         </div>
       </div>
 
@@ -862,7 +869,7 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
         </span>
         <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
           <span class="bkt-val" id="bk-hbtc-val">$0</span>
-          <span style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ok);background:var(--ok-bg);border:1px solid var(--ok-b);padding:2px 8px;border-radius:10px">✅ Current Law</span>
+          <span style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ok);background:var(--ok-bg);border:1px solid var(--ok-b);padding:2px 8px;border-radius:10px">✅ <a href="https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/rc4028.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px">Current Law — RC4028</a></span>
         </div>
       </div>
 
@@ -874,7 +881,7 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
         </span>
         <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
           <span class="bkt-val" id="bk-ltt-val">$0</span>
-          <span style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ok);background:var(--ok-bg);border:1px solid var(--ok-b);padding:2px 8px;border-radius:10px">✅ Current Law</span>
+          <span style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ok);background:var(--ok-bg);border:1px solid var(--ok-b);padding:2px 8px;border-radius:10px">✅ <a href="https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/rc4028.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px">Current Law — RC4028</a></span>
         </div>
       </div>
 
@@ -1080,7 +1087,16 @@ function onProv(){
     cityGrp.classList.add('hidden');
     cityEl.innerHTML='<option value="">— Select your city —</option>';
   }
-  gstManual=false; autoGST();
+  // Update rate display box
+  const rateDisp=document.getElementById('rate-display');
+  if(rateDisp && c){
+    const rateLabel = c.rate===13 ? '13% HST — Ontario (5% fed + 8% prov)' :
+                      c.rate===15 ? '15% HST — NS/NB/NL/PE (5% fed + 10% prov)' :
+                                    '5% GST — federal only';
+    rateDisp.textContent=rateLabel;
+    rateDisp.classList.add('filled');
+  }
+  autoPopulate();
 }
 
 function onPrimaryRes(){
@@ -1271,7 +1287,7 @@ function calculate(){
   if(!pr)   {alert('Please indicate if this is your primary residence.');return;}
   if(pr==='no'){alert('This rebate requires a primary residence.');return;}
   if(fmv<=0){alert('Please enter the Fair Market Value (FMV).');return;}
-  if(price<=0 && gstIn<=0){alert('Please enter a purchase price or total GST/HST paid.');return;}
+  if(price<=0){alert('Please enter your purchase price.');return;}
 
   const totalTax  = gstIn>0 ? gstIn : +(price*(rate/100)).toFixed(2);
   const purchPrice= price>0 ? price  : +(totalTax/(rate/100)).toFixed(2);
@@ -1310,9 +1326,9 @@ function calculate(){
   if(showFed){
     const useC4=isC4&&c4.rebate>=rc4028.rebate;
     document.getElementById('dp-fed-amt').textContent=fmt(bestFed);
-    document.getElementById('dp-fed-sub').textContent=
+    document.getElementById('dp-fed-sub').innerHTML=
       useC4 ? 'Bill C-4 first-time buyer rebate (✅ Royal Assent Mar 12 2026)'
-             : 'RC4028 standard federal rebate';
+             : 'RC4028 standard federal rebate &mdash; <a href="https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/rc4028.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;font-weight:700">RC4028</a>';
     document.getElementById('dp-fed-formula').textContent=useC4?c4.note:rc4028.note;
     // Update approved badge
     const badge=fedPane.querySelector('[style*="APPROVED"]');
@@ -1321,11 +1337,12 @@ function calculate(){
 
   if(showProv){
     document.getElementById('dp-prov-amt').textContent=fmt(onExist.rebate);
-    document.getElementById('dp-prov-sub').textContent=
-      prov==='ON' ? 'Ontario Provincial HST Rebate (RC4028 — current law)'
-                  : 'Provincial HST Rebate';
+    document.getElementById('dp-prov-sub').innerHTML=
+      prov==='ON'
+        ? 'Ontario Provincial HST Rebate &mdash; <a href="https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/rc4028.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;font-weight:700">RC4028</a>'
+        : 'Provincial HST Rebate';
     document.getElementById('dp-prov-formula').textContent=onExist.note;
-    // Update banner
+    // Banner: Ontario existing provincial IS current law. Other HST provinces = pending.
     const banner=document.getElementById('dp-prov-status-banner');
     const bannerTxt=document.getElementById('dp-prov-status-text');
     if(banner&&bannerTxt){
@@ -1333,10 +1350,12 @@ function calculate(){
         banner.style.background='rgba(21,128,61,.1)';
         banner.style.borderColor='rgba(21,128,61,.2)';
         banner.querySelector('span').textContent='✅';
-        bannerTxt.innerHTML='<strong>Current law — RC4028.</strong> This Ontario provincial rebate is already in effect. You can claim this now.';
+        bannerTxt.innerHTML='<strong>Current law &mdash; <a href="https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/rc4028.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">RC4028</a>.</strong> This Ontario provincial HST rebate is in effect. You can claim this now.';
       } else {
-        banner.querySelector('span').textContent='ℹ️';
-        bannerTxt.innerHTML='<strong>No provincial HST rebate</strong> applies for your province/situation.';
+        banner.style.background='rgba(180,83,9,.08)';
+        banner.style.borderColor='rgba(180,83,9,.2)';
+        banner.querySelector('span').textContent='⏳';
+        bannerTxt.innerHTML='<strong>Pending provincial legislation.</strong> This provincial HST rebate has not yet been passed into law. Do not file or rely on this amount until officially legislated.';
       }
     }
   }
@@ -1362,11 +1381,30 @@ function calculate(){
   // Provincial
   document.getElementById('bk-on').textContent=fmt(onExist.rebate);
   document.getElementById('bk-prov-row').classList.toggle('hidden',!hasHST);
-  document.getElementById('bk-prov-lbl').firstChild.textContent=
-    prov==='ON'?'Ontario Provincial HST Rebate (current law) ':
-    hasHST?`${PROV[prov]?.label||prov} Provincial HST Rebate `:'Provincial Rebate ';
-  document.getElementById('bk-prov-status-badge').textContent=
-    onExist.rebate>0?'✅ Current Law (ON)':'—';
+  // innerHTML so links render — rebuild label node cleanly
+  const _provLbl=document.getElementById('bk-prov-lbl');
+  const _provTip=_provLbl?_provLbl.querySelector('.tip-icon'):null;
+  const _provBox=_provLbl?_provLbl.querySelector('.tip-box'):null;
+  if(_provLbl){
+    _provLbl.innerHTML='';
+    const _s=document.createElement('span');
+    if(prov==='ON')
+      _s.innerHTML='Ontario Provincial HST Rebate &mdash; <a href="https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/rc4028.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;font-weight:700">RC4028</a> ';
+    else if(hasHST)
+      _s.textContent=(PROV[prov]?.label||prov)+' Provincial HST Rebate ';
+    else
+      _s.textContent='Provincial Rebate ';
+    _provLbl.appendChild(_s);
+    if(_provTip)_provLbl.appendChild(_provTip);
+    if(_provBox)_provLbl.appendChild(_provBox);
+  }
+  const _badge=document.getElementById('bk-prov-status-badge');
+  if(_badge){
+    if(onExist.rebate>0)
+      _badge.innerHTML='✅ <a href="https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/rc4028.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px">Current Law &mdash; RC4028</a>';
+    else
+      _badge.textContent='⏳ Pending Legislation';
+  }
   document.getElementById('bk-ns-row').classList.toggle('hidden',prov!=='NS');
 
   // HBTC
@@ -1449,27 +1487,38 @@ function calculate(){
   setTimeout(()=>document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'}),80);
 }
 
-/* ── AUTO GST ── */
-let gstManual=false;
-function autoGST(){
-  if(gstManual) return;
-  const price=parseFloat(document.getElementById('price').value)||0;
-  const rate=parseFloat(document.getElementById('taxRate').value)||5;
-  const gstEl=document.getElementById('gst');
-  const hint=document.getElementById('gst-hint');
-  if(price>0){
-    const computed=+(price*(rate/100)).toFixed(2);
-    gstEl.value=computed;
-    if(hint) hint.textContent=`Auto-calculated: $${price.toLocaleString('en-CA')} × ${rate}% = $${computed.toLocaleString('en-CA')}`;
+/* ── AUTO-POPULATE: FMV, GST, Rate from price + province ── */
+function autoPopulate(){
+  const price = parseFloat(document.getElementById('price').value)||0;
+  const rate  = parseFloat(document.getElementById('taxRate').value)||5;
+
+  // FMV = purchase price (standard assumption for new builds)
+  const fmvEl     = document.getElementById('fmv');
+  const fmvDisp   = document.getElementById('fmv-display');
+  fmvEl.value = price > 0 ? price : '';
+  if(fmvDisp){
+    fmvDisp.textContent = price > 0 ? '$'+price.toLocaleString('en-CA') : '— enter purchase price above';
+    fmvDisp.classList.toggle('filled', price > 0);
+  }
+
+  // GST/HST = price × rate
+  const gstEl   = document.getElementById('gst');
+  const gstDisp = document.getElementById('gst-display');
+  if(price > 0){
+    const gst = +(price*(rate/100)).toFixed(2);
+    gstEl.value = gst;
+    if(gstDisp){
+      gstDisp.textContent = `$${gst.toLocaleString('en-CA')}  (${rate}% of $${price.toLocaleString('en-CA')})`;
+      gstDisp.classList.add('filled');
+    }
   } else {
-    gstEl.value='';
-    if(hint) hint.textContent='Auto-calculated — or enter exact amount from closing documents';
+    gstEl.value = '';
+    if(gstDisp){ gstDisp.textContent='— enter purchase price above'; gstDisp.classList.remove('filled'); }
   }
 }
-function onGSTManual(){
-  gstManual=document.getElementById('gst').value!=='';
-  if(!gstManual) autoGST();
-}
+// kept for compatibility — price input calls this
+function autoGST(){ autoPopulate(); }
+function onGSTManual(){} // no-op — GST is now fully auto
 
 /* ── FILING ── */
 const ft=t=>`<span class="ftag">📄 ${t}</span>`;
@@ -1527,8 +1576,12 @@ function resetForm(){
   document.getElementById('results').classList.add('hidden');
   document.getElementById('al-pr').classList.add('hidden');
   ['al-high','al-warn'].forEach(id=>document.getElementById(id).classList.add('hidden'));
-  const hint=document.getElementById('gst-hint');
-  if(hint) hint.textContent='Auto-calculated — or enter exact amount from closing documents';
+  ['fmv-display','gst-display'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el){el.textContent='— enter purchase price above';el.classList.remove('filled');}
+  });
+  const rateDisp=document.getElementById('rate-display');
+  if(rateDisp){rateDisp.textContent='— (select province first)';rateDisp.classList.remove('filled');}
   selectRT('federal');
   const dpBoth=document.getElementById('dp-both');
   if(dpBoth){dpBoth.style.gridTemplateColumns='';dpBoth.querySelector('.dp-fed').style.display='';dpBoth.querySelector('.dp-prov').style.display='';}
