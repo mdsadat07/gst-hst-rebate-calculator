@@ -450,7 +450,7 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
         </div>
       </div>
       <div class="rtype-grid">
-        <div class="rtype-card on" id="rt-fed-lbl" onclick="selectRT('federal')">
+        <div class="rtype-card" id="rt-fed-lbl" onclick="selectRT('federal')">
           <input type="radio" name="rt" value="federal" id="rt-fed" checked style="display:none">
           <div class="rtype-chk" id="rtc-federal">✓</div>
           <span class="rtype-em">🏛️</span>
@@ -480,7 +480,7 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
     <div class="fg">
 
       <div class="fld fg-full">
-        <span class="fld-lbl has-tip">
+        <label class="fld-lbl has-tip" for="homeType">
           What type of home is this?
           <span class="tip-icon">?</span>
           <div class="tip-box">
@@ -488,14 +488,15 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
             <strong>Owner-Built</strong> — you built the home yourself or hired contractors and own the land.<br><br>
             <strong>Substantially Renovated</strong> — you gutted and rebuilt 90%+ of the interior of an existing home you own.
           </div>
-        </span>
-        <div class="pills">
-          <input type="radio" name="ht" value="purchased" id="ht1">
-          <label for="ht1" class="pill">🏗️ Purchased from Builder</label>
-          <input type="radio" name="ht" value="owner-built" id="ht2">
-          <label for="ht2" class="pill">🔨 Owner-Built / Self-Constructed</label>
-          <input type="radio" name="ht" value="reno" id="ht3">
-          <label for="ht3" class="pill">🔧 Substantially Renovated</label>
+        </label>
+        <div class="sel-wrap">
+          <select id="homeType">
+            <option value="">— Select home type —</option>
+            <option value="purchased">🏗️ Purchased from Builder</option>
+            <option value="owner-built">🔨 Owner-Built / Self-Constructed</option>
+            <option value="reno">🔧 Substantially Renovated</option>
+          </select>
+          <div class="sel-arr"><svg viewBox="0 0 16 16" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 6 8 10 12 6"/></svg></div>
         </div>
       </div>
 
@@ -586,14 +587,18 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
       </div>
 
       <div class="fld fg-full">
-        <span class="fld-lbl has-tip">
+        <label class="fld-lbl has-tip" for="primaryRes">
           Is this home your (or a relation's) primary place of residence?
           <span class="tip-icon">?</span>
           <div class="tip-box">A <strong>primary place of residence</strong> is where you live on a permanent basis. You can only have one primary residence.<br><br>Vacation cottages, investment properties, and rental homes do not qualify. If renting, see CRA Guide RC4231.</div>
-        </span>
-        <div class="pills">
-          <input type="radio" name="pr" value="yes" id="pr1"><label for="pr1" class="pill">✅ Yes — primary residence</label>
-          <input type="radio" name="pr" value="no" id="pr2"><label for="pr2" class="pill">❌ No (rental / investment / vacation)</label>
+        </label>
+        <div class="sel-wrap">
+          <select id="primaryRes" onchange="onPrimaryRes()">
+            <option value="">— Select an option —</option>
+            <option value="yes">✅ Yes — primary residence</option>
+            <option value="no">❌ No (rental / investment / vacation)</option>
+          </select>
+          <div class="sel-arr"><svg viewBox="0 0 16 16" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 6 8 10 12 6"/></svg></div>
         </div>
         <div id="al-pr" class="alert al-d hidden" style="margin-top:12px">
           <span class="al-icon">🚫</span>
@@ -603,15 +608,19 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
 
       <!-- First-time buyer (for Bill C-4) -->
       <div class="fld fg-full" id="grp-ftb">
-        <span class="fld-lbl has-tip">
+        <label class="fld-lbl has-tip" for="firstTimeBuyer">
           Are you a first-time home buyer? <span style="font-size:11px;font-weight:600;color:var(--accent)">(Required for Bill C-4)</span>
           <span class="tip-icon">?</span>
           <div class="tip-box"><strong>Bill C-4 first-time buyer definition:</strong> You must not have owned AND occupied any home as your principal residence anywhere in the world at any time in the 4 calendar years before your purchase year.<br><br>If buying with a spouse or partner, <em>both</em> of you must independently meet this rule.<br><br>You must also be a Canadian citizen or permanent resident, and at least 18 years old.<br><br>Work permit and study permit holders do <em>not</em> qualify.</div>
-        </span>
-        <div class="pills">
-          <input type="radio" name="ftb" value="yes" id="ftb1"><label for="ftb1" class="pill">🏠 Yes — first-time buyer</label>
-          <input type="radio" name="ftb" value="no" id="ftb2"><label for="ftb2" class="pill">🔄 No — previous homeowner</label>
-          <input type="radio" name="ftb" value="unsure" id="ftb3"><label for="ftb3" class="pill">❓ Not sure</label>
+        </label>
+        <div class="sel-wrap">
+          <select id="firstTimeBuyer">
+            <option value="">— Select an option —</option>
+            <option value="yes">🏠 Yes — first-time buyer</option>
+            <option value="no">🔄 No — previous homeowner</option>
+            <option value="unsure">❓ Not sure</option>
+          </select>
+          <div class="sel-arr"><svg viewBox="0 0 16 16" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 6 8 10 12 6"/></svg></div>
         </div>
       </div>
 
@@ -954,25 +963,31 @@ function onProv(){
   gstManual=false; autoGST();
 }
 
-document.querySelectorAll('input[name="pr"]').forEach(r=>
-  r.addEventListener('change',function(){
-    document.getElementById('al-pr').classList.toggle('hidden',this.value!=='no');
-  })
-);
+function onPrimaryRes(){
+  const val=document.getElementById('primaryRes').value;
+  document.getElementById('al-pr').classList.toggle('hidden',val!=='no');
+}
 
 /* ── FORMAT ── */
 const fmt=n=>(n==null||n<=0)?'$0':'$'+Math.round(n).toLocaleString('en-CA');
 
 /* ── REBATE TYPE SELECTOR ── */
+document.addEventListener('DOMContentLoaded',()=>selectRT('federal'));
+
+/* radio IDs: rt-fed, rt-prov, rt-both */
+/* card IDs: rt-fed-lbl, rt-prov-lbl, rt-both-lbl | radio IDs: rt-fed, rt-prov, rt-both | check IDs: rtc-federal, rtc-provincial, rtc-both */
+const RT_CARD ={federal:'rt-fed-lbl',  provincial:'rt-prov-lbl',  both:'rt-both-lbl'};
+const RT_RADIO={federal:'rt-fed',      provincial:'rt-prov',      both:'rt-both'};
+const RT_CHK  ={federal:'rtc-federal', provincial:'rtc-provincial',both:'rtc-both'};
 function selectRT(val){
   ['federal','provincial','both'].forEach(v=>{
-    const lbl=document.getElementById('rt-'+v+'-lbl');
-    const c=document.getElementById('rtc-'+v);
-    if(lbl){lbl.classList.remove('on');if(v===val)lbl.classList.add('on');}
-    if(c){c.textContent=v===val?'✓':'';}
+    const card=document.getElementById(RT_CARD[v]);
+    const chk =document.getElementById(RT_CHK[v]);
+    const rb  =document.getElementById(RT_RADIO[v]);
+    if(card){card.classList.remove('on'); if(v===val) card.classList.add('on');}
+    if(chk) {chk.textContent = v===val ? '✓' : '';}
+    if(rb)  {rb.checked = v===val;}
   });
-  const rb=document.getElementById('rt-'+val);
-  if(rb) rb.checked=true;
 }
 
 /* ══════════════════════════════════════════════════
@@ -1068,10 +1083,10 @@ function calcProvProposed(totalTax, rate, fmv, prov){
 
 /* ── MAIN CALCULATE ── */
 function calculate(){
-  const ht   =document.querySelector('input[name="ht"]:checked')?.value;
+  const ht   =document.getElementById('homeType').value;
   const prov =document.getElementById('province').value;
-  const pr   =document.querySelector('input[name="pr"]:checked')?.value;
-  const ftb  =document.querySelector('input[name="ftb"]:checked')?.value;
+  const pr   =document.getElementById('primaryRes').value;
+  const ftb  =document.getElementById('firstTimeBuyer').value;
   const rate =parseFloat(document.getElementById('taxRate').value)||5;
   const price=parseFloat(document.getElementById('price').value)||0;
   const fmv  =parseFloat(document.getElementById('fmv').value)||0;
@@ -1079,9 +1094,9 @@ function calculate(){
   const lhst =isOn('cb-lhst'), bc=isOn('cb-bc');
   const rtVal=document.querySelector('input[name="rt"]:checked')?.value||'both';
 
-  if(!ht)       {alert('Please select a home type in Step 1.');return;}
+  if(!ht)       {alert('Please select a home type.');return;}
   if(!prov)     {alert('Please select a province in Step 1.');return;}
-  if(!pr)       {alert('Please indicate primary residence status.');return;}
+  if(!pr)       {alert('Please indicate if this is your primary residence.');return;}
   if(pr==='no') {alert('This rebate requires a primary residence.');return;}
   if(fmv<=0)    {alert('Please enter the Fair Market Value (FMV).');return;}
   if(price<=0 && gstIn<=0){alert('Please enter a purchase price or total GST/HST paid.');return;}
@@ -1279,6 +1294,7 @@ ${onL}<p style="margin-top:10px">📮 <strong>Mail to:</strong></p>${ON?onA:peA}
 function resetForm(){
   gstManual=false;
   document.querySelectorAll('input[type=radio]').forEach(r=>r.checked=false);
+  ['homeType','primaryRes','firstTimeBuyer'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
   document.querySelectorAll('input[type=number]').forEach(i=>i.value='');
   ['cb-lhst','cb-bc'].forEach(id=>{const e=document.getElementById(id);if(e)e.checked=false;});
   ['lbl-lhst','lbl-bc'].forEach(id=>{const e=document.getElementById(id);if(e){e.classList.remove('on');const b=e.querySelector('.chk-box');if(b)b.textContent='';}});
