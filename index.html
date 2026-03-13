@@ -311,6 +311,59 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
 .ft-links a:hover{color:var(--accent)}
 .ft-sep{color:var(--border2)}
 
+/* ══════════════ REBATE TYPE SELECTOR ══════════════ */
+.rtype-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:6px}
+@media(max-width:600px){.rtype-grid{grid-template-columns:1fr}}
+.rtype-card{position:relative;border:2px solid var(--border);border-radius:14px;padding:20px 18px;cursor:pointer;background:var(--surface2);transition:all var(--fast) var(--e);user-select:none;overflow:hidden}
+.rtype-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:14px 14px 0 0;background:transparent;transition:background var(--fast) var(--e)}
+.rtype-card:hover{border-color:var(--border2);transform:translateY(-3px);box-shadow:var(--s2)}
+.rtype-card.on{border-color:var(--accent);background:var(--accent-lit);box-shadow:0 0 0 3px var(--accent-glow2)}
+.rtype-card.on::before{background:linear-gradient(90deg,var(--accent),#22c55e)}
+.rtype-card input[type=radio]{display:none}
+.rtype-em{font-size:28px;margin-bottom:10px;display:block;transition:transform var(--fast) var(--e)}
+.rtype-card:hover .rtype-em{transform:scale(1.15) rotate(-5deg)}
+.rtype-name{font-size:14px;font-weight:800;color:var(--text);line-height:1.3;margin-bottom:4px}
+.rtype-desc{font-size:12px;color:var(--text3);line-height:1.5}
+.rtype-status{display:inline-flex;align-items:center;gap:5px;margin-top:9px;font-size:10.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;padding:3px 10px;border-radius:20px;border:1px solid transparent}
+.rs-live{color:var(--ok);background:var(--ok-bg);border-color:var(--ok-b)}
+.rs-pend{color:#92400e;background:#fef3c7;border-color:rgba(146,64,14,.2)}
+[data-theme="dark"] .rs-pend{color:#fbbf24;background:#1a1200;border-color:rgba(251,191,36,.2)}
+.rtype-chk{position:absolute;top:12px;right:12px;width:20px;height:20px;border-radius:50%;border:2px solid var(--border2);background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;transition:all var(--fast) var(--e)}
+.rtype-card.on .rtype-chk{background:var(--accent);border-color:var(--accent)}
+
+/* ══════════════ DUAL RESULT PANEL ══════════════ */
+.dual-panel{display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:var(--r);overflow:hidden;border:1px solid var(--border);box-shadow:var(--s3);margin-bottom:24px}
+@media(max-width:580px){.dual-panel{grid-template-columns:1fr}}
+.dp-fed{background:linear-gradient(150deg,#0f3d20 0%,#0a2e18 100%);padding:36px 32px;position:relative;overflow:hidden;transition:transform var(--fast) var(--e)}
+.dp-fed:hover{transform:scale(1.01)}
+.dp-prov{background:linear-gradient(150deg,#1e1a00 0%,#120f00 100%);padding:36px 32px;position:relative;overflow:hidden;border-left:1px solid rgba(255,255,255,.06);transition:transform var(--fast) var(--e)}
+.dp-prov:hover{transform:scale(1.01)}
+@media(max-width:580px){.dp-prov{border-left:none;border-top:1px solid rgba(255,255,255,.06)}}
+.dp-glow{position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;pointer-events:none}
+.dp-fed .dp-glow{background:radial-gradient(ellipse,rgba(74,222,128,.08),transparent 70%)}
+.dp-prov .dp-glow{background:radial-gradient(ellipse,rgba(251,191,36,.08),transparent 70%)}
+.dp-inner{position:relative;z-index:1}
+.dp-tag{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:14px}
+.dp-fed .dp-tag{background:rgba(74,222,128,.15);border:1px solid rgba(74,222,128,.25);color:#4ade80}
+.dp-prov .dp-tag{background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.2);color:#fbbf24}
+.dp-lbl{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.38);margin-bottom:8px}
+.dp-amt{font-family:'Lora',serif;font-size:clamp(38px,6vw,54px);font-weight:600;color:#fff;line-height:1;letter-spacing:-.03em;transition:all var(--mid) var(--e)}
+.dp-fed:hover .dp-amt{transform:scale(1.04)}
+.dp-prov:hover .dp-amt{transform:scale(1.04)}
+.dp-sub{font-size:12.5px;color:rgba(255,255,255,.45);margin-top:8px;line-height:1.55}
+.dp-divider{height:1px;background:rgba(255,255,255,.08);margin:18px 0}
+.dp-formula{font-size:11.5px;color:rgba(255,255,255,.38);font-family:monospace;line-height:1.7}
+.dp-pend-banner{margin-top:14px;padding:10px 14px;border-radius:8px;background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.2);display:flex;gap:8px;align-items:flex-start}
+.dp-pend-banner p{font-size:11.5px;color:rgba(255,200,0,.8);line-height:1.55}
+.dp-pend-banner strong{color:#fbbf24}
+
+/* Total strip */
+.total-strip{background:var(--surface);border:1px solid var(--border);border-top:none;border-radius:0 0 var(--r) var(--r);padding:20px 32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;box-shadow:var(--s1)}
+.ts-lbl{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--text3)}
+.ts-note{font-size:12px;color:var(--text3);font-weight:400}
+.ts-amt{font-family:'Lora',serif;font-size:32px;font-weight:600;color:var(--accent);letter-spacing:-.02em}
+.ts-pend{font-size:12px;color:var(--warn);background:var(--warn-bg);border:1px solid var(--warn-b);padding:4px 12px;border-radius:20px;font-weight:700}
+
 .hidden{display:none!important}
 @media(max-width:560px){
   .topbar{padding:0 16px}
@@ -385,6 +438,45 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
       <div class="card-ic">🏡</div>
       <div><div class="card-step">Step 1 of 3</div><div class="card-title">About Your Home</div></div>
     </div>
+    <!-- REBATE TYPE SELECTOR -->
+    <div style="margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid var(--border)">
+      <div class="fld-lbl has-tip" style="font-size:15px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:6px;cursor:help">
+        What would you like to calculate?
+        <span class="tip-icon">?</span>
+        <div class="tip-box">
+          <strong>Federal Rebate</strong> — available in all provinces via CRA. Approved and currently in effect.<br><br>
+          <strong>Provincial Rebate</strong> — rebate on the provincial HST portion. Estimated/proposed — not yet passed into law.<br><br>
+          <strong>Both</strong> — see full potential side by side, with clear labels on what is confirmed vs pending.
+        </div>
+      </div>
+      <div class="rtype-grid">
+        <div class="rtype-card on" id="rt-fed-lbl" onclick="selectRT('federal')">
+          <input type="radio" name="rt" value="federal" id="rt-fed" checked style="display:none">
+          <div class="rtype-chk" id="rtc-federal">✓</div>
+          <span class="rtype-em">🏛️</span>
+          <div class="rtype-name">Federal Rebate Only</div>
+          <div class="rtype-desc">GST/HST federal portion — via CRA. Applies in all provinces.</div>
+          <span class="rtype-status rs-live">✅ Approved &amp; In Effect</span>
+        </div>
+        <div class="rtype-card" id="rt-prov-lbl" onclick="selectRT('provincial')">
+          <input type="radio" name="rt" value="provincial" id="rt-prov" style="display:none">
+          <div class="rtype-chk" id="rtc-provincial"></div>
+          <span class="rtype-em">🏙️</span>
+          <div class="rtype-name">Provincial Rebate Only</div>
+          <div class="rtype-desc">Provincial HST portion — Ontario, NS, NB, NL, PE only.</div>
+          <span class="rtype-status rs-pend">⏳ Estimated — Not Yet Approved</span>
+        </div>
+        <div class="rtype-card" id="rt-both-lbl" onclick="selectRT('both')">
+          <input type="radio" name="rt" value="both" id="rt-both" style="display:none">
+          <div class="rtype-chk" id="rtc-both"></div>
+          <span class="rtype-em">📊</span>
+          <div class="rtype-name">Show Both</div>
+          <div class="rtype-desc">Full picture — federal (confirmed) + provincial (estimated) side by side.</div>
+          <span class="rtype-status rs-live">⭐ Recommended</span>
+        </div>
+      </div>
+    </div>
+
     <div class="fg">
 
       <div class="fld fg-full">
@@ -448,43 +540,43 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
 
       <div class="fld fg-full" id="grp-price">
         <label class="fld-lbl has-tip" for="price">
-          Purchase price paid to the builder (before tax)
+          Purchase price paid (before tax)
           <span class="tip-icon">?</span>
-          <div class="tip-box">The total amount you paid to the builder <strong>not including</strong> GST/HST. Do not include land transfer taxes, lawyer fees, or payments made to third-party contractors outside the builder's agreement.</div>
+          <div class="tip-box">The amount you paid to the builder <strong>before</strong> GST/HST. Exclude land transfer taxes, legal fees, and payments to third-party contractors. The GST/HST field below will auto-fill based on this price and the selected rate.</div>
         </label>
-        <span class="fld-hint">Total before GST/HST — exclude land transfer taxes and legal fees</span>
-        <div class="num-wrap"><span class="num-sym">$</span><input type="number" id="price" min="0" step="1000" placeholder="e.g. 425,000"></div>
+        <span class="fld-hint">Enter before-tax price — GST/HST will auto-calculate below</span>
+        <div class="num-wrap"><span class="num-sym">$</span><input type="number" id="price" min="0" step="1000" placeholder="e.g. 425,000" oninput="autoGST()"></div>
       </div>
 
       <div class="fld fg-full">
         <label class="fld-lbl has-tip" for="fmv">
           Fair Market Value (FMV) of the complete home
           <span class="tip-icon">?</span>
-          <div class="tip-box"><strong>FMV</strong> = the highest price your home would reasonably sell for in an open market between a willing buyer and seller — including the building, land, garage, shed, and other outbuildings. <em>Exclude</em> GST/HST and land transfer taxes.<br><br>If your FMV is between $350K and $450K, the federal rebate is reduced on a sliding scale. At $450K+, no federal rebate is available.</div>
+          <div class="tip-box"><strong>FMV</strong> is the price your home would sell for between a willing buyer and seller on the open market — including building, land, garage, and outbuildings. Exclude GST/HST and land transfer taxes.<br><br><strong>RC4028 program:</strong> FMV $350K–$450K = sliding scale reduction. FMV ≥ $450K = no federal rebate.<br><br><strong>Bill C-4 program:</strong> FMV up to $1M = full 5% rebate. $1M–$1.5M = partial. Over $1.5M = none.</div>
         </label>
-        <span class="fld-hint">Building + land + outbuildings. Exclude GST/HST and land transfer taxes. Get an appraisal if near $350K–$450K.</span>
+        <span class="fld-hint">Building + land + outbuildings. Exclude GST/HST and land transfer taxes.</span>
         <div class="num-wrap"><span class="num-sym">$</span><input type="number" id="fmv" min="0" step="1000" placeholder="e.g. 440,000"></div>
       </div>
 
       <div class="fld">
-        <label class="fld-lbl has-tip" for="gstPaid">
+        <label class="fld-lbl has-tip" for="gst">
           Total GST/HST paid
           <span class="tip-icon">?</span>
-          <div class="tip-box">Enter the total tax you paid — found on your closing Statement of Adjustments, or the sum of all construction invoices (for owner-built). For HST provinces, include the full HST amount (federal + provincial parts).</div>
+          <div class="tip-box">Auto-calculated from your purchase price × rate. You can also enter the exact amount from your closing Statement of Adjustments or construction invoices. For HST provinces this is the <em>full</em> HST amount (federal + provincial combined).</div>
         </label>
-        <span class="fld-hint">From your closing documents or construction invoices</span>
-        <div class="num-wrap"><span class="num-sym">$</span><input type="number" id="gst" min="0" step="100" placeholder="e.g. 22,000"></div>
+        <span class="fld-hint" id="gst-hint">Auto-calculated — or enter exact amount from closing documents</span>
+        <div class="num-wrap"><span class="num-sym">$</span><input type="number" id="gst" min="0" step="100" placeholder="Auto-calculated" oninput="onGSTManual()"></div>
       </div>
 
       <div class="fld">
         <label class="fld-lbl has-tip" for="taxRate">
           GST/HST rate applied
           <span class="tip-icon">?</span>
-          <div class="tip-box"><strong>5% GST</strong> — applies in BC, AB, SK, MB, QC, and territories.<br><br><strong>13% HST</strong> — applies in Ontario (5% federal + 8% provincial).<br><br><strong>15% HST</strong> — applies in NS, NB, NL, PE (5% federal + 10% provincial).<br><br>The calculator automatically extracts only the <em>federal</em> portion for rebate purposes.</div>
+          <div class="tip-box"><strong>5% GST</strong> — BC, AB, SK, MB, QC, territories.<br><br><strong>13% HST</strong> — Ontario (5% federal + 8% provincial).<br><br><strong>15% HST</strong> — NS, NB, NL, PE (5% federal + 10% provincial).<br><br>The calculator automatically extracts only the federal portion for rebate calculations.</div>
         </label>
         <span class="fld-hint">Auto-set by province — adjust only if your situation differs</span>
         <div class="sel-wrap">
-          <select id="taxRate">
+          <select id="taxRate" onchange="autoGST()">
             <option value="5">5% GST (BC, AB, SK, MB, QC, Territories)</option>
             <option value="13">13% HST (Ontario)</option>
             <option value="15">15% HST (NS, NB, NL, PE)</option>
@@ -497,7 +589,7 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
         <span class="fld-lbl has-tip">
           Is this home your (or a relation's) primary place of residence?
           <span class="tip-icon">?</span>
-          <div class="tip-box">A <strong>primary place of residence</strong> is where you live on a permanent basis — the address on your ID, tax return, and voter registration. You can only have one primary residence.<br><br>Vacation cottages, investment properties, and rental homes do not qualify for this rebate. If renting, see the <em>New Residential Rental Property Rebate</em> (Guide RC4231).</div>
+          <div class="tip-box">A <strong>primary place of residence</strong> is where you live on a permanent basis. You can only have one primary residence.<br><br>Vacation cottages, investment properties, and rental homes do not qualify. If renting, see CRA Guide RC4231.</div>
         </span>
         <div class="pills">
           <input type="radio" name="pr" value="yes" id="pr1"><label for="pr1" class="pill">✅ Yes — primary residence</label>
@@ -505,7 +597,21 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
         </div>
         <div id="al-pr" class="alert al-d hidden" style="margin-top:12px">
           <span class="al-icon">🚫</span>
-          <div><strong>Not eligible for this rebate.</strong> The home must be your or a relation's primary place of residence. If renting, see <a href="https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/rc4231.html" target="_blank">CRA Guide RC4231</a> — New Residential Rental Property Rebate.</div>
+          <div><strong>Not eligible for this rebate.</strong> The home must be your or a relation's primary place of residence. If renting, see <a href="https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/rc4231.html" target="_blank">CRA Guide RC4231</a>.</div>
+        </div>
+      </div>
+
+      <!-- First-time buyer (for Bill C-4) -->
+      <div class="fld fg-full" id="grp-ftb">
+        <span class="fld-lbl has-tip">
+          Are you a first-time home buyer? <span style="font-size:11px;font-weight:600;color:var(--accent)">(Required for Bill C-4)</span>
+          <span class="tip-icon">?</span>
+          <div class="tip-box"><strong>Bill C-4 first-time buyer definition:</strong> You must not have owned AND occupied any home as your principal residence anywhere in the world at any time in the 4 calendar years before your purchase year.<br><br>If buying with a spouse or partner, <em>both</em> of you must independently meet this rule.<br><br>You must also be a Canadian citizen or permanent resident, and at least 18 years old.<br><br>Work permit and study permit holders do <em>not</em> qualify.</div>
+        </span>
+        <div class="pills">
+          <input type="radio" name="ftb" value="yes" id="ftb1"><label for="ftb1" class="pill">🏠 Yes — first-time buyer</label>
+          <input type="radio" name="ftb" value="no" id="ftb2"><label for="ftb2" class="pill">🔄 No — previous homeowner</label>
+          <input type="radio" name="ftb" value="unsure" id="ftb3"><label for="ftb3" class="pill">❓ Not sure</label>
         </div>
       </div>
 
@@ -558,31 +664,65 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
 
     <div id="al-high" class="alert al-d hidden">
       <span class="al-icon">⛔</span>
-      <div><strong>FMV is $450,000 or more — no federal rebate.</strong> If your home is in Ontario, you may still claim the Ontario provincial rebate. See <a href="https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/rc4028.html" target="_blank">CRA Guide RC4028</a>.</div>
+      <div><strong>FMV is $450,000 or more — no federal rebate.</strong> If your home is in Ontario or an HST province, the provincial rebate (estimated) may still apply. See <a href="https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/rc4028.html" target="_blank">CRA Guide RC4028</a>.</div>
     </div>
     <div id="al-warn" class="alert al-w hidden">
       <span class="al-icon">⚠️</span>
       <div><strong>FMV between $350,000 and $449,999.</strong> Your federal rebate is reduced on a sliding scale. A professional appraisal is strongly recommended if your FMV is near these thresholds.</div>
     </div>
 
-    <!-- RESULT HERO -->
-    <div class="res-hero">
-      <div class="rh-b1"></div><div class="rh-b2"></div>
-      <div class="rh-inner">
-        <div>
-          <div class="rh-lbl">Your Estimated Total Rebate</div>
-          <div class="rh-num" id="rh-num">$0</div>
-          <div class="rh-sub" id="rh-sub">Federal + Provincial (if applicable)</div>
+    <!-- ══ DUAL RESULT PANEL ══ -->
+    <div id="dp-wrap">
+      <!-- BOTH / FEDERAL + PROVINCIAL SIDE BY SIDE -->
+      <div class="dual-panel" id="dp-both">
+        <!-- Federal side -->
+        <div class="dp-fed">
+          <div class="dp-glow"></div>
+          <div class="dp-inner">
+            <div class="dp-tag">🏛️ Federal Rebate</div>
+            <div class="dp-lbl">Amount You Can Claim</div>
+            <div class="dp-amt" id="dp-fed-amt">$0</div>
+            <div class="dp-sub" id="dp-fed-sub">Federal GST/HST portion — via CRA</div>
+            <div class="dp-divider"></div>
+            <div class="dp-formula" id="dp-fed-formula">—</div>
+            <div style="margin-top:14px;display:inline-flex;align-items:center;gap:6px;background:rgba(74,222,128,.12);border:1px solid rgba(74,222,128,.22);padding:5px 13px;border-radius:20px">
+              <span style="font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#4ade80">✅ APPROVED &amp; IN EFFECT</span>
+            </div>
+          </div>
         </div>
-        <div class="rh-chips">
-          <div class="rh-chip">📅 File within 2 years</div>
-          <div class="rh-chip">🇨🇦 Based on RC4028 &amp; Bill C-4</div>
+        <!-- Provincial side -->
+        <div class="dp-prov">
+          <div class="dp-glow"></div>
+          <div class="dp-inner">
+            <div class="dp-tag">🏙️ Provincial Rebate</div>
+            <div class="dp-lbl">Estimated Amount</div>
+            <div class="dp-amt" id="dp-prov-amt">$0</div>
+            <div class="dp-sub" id="dp-prov-sub">Provincial HST portion — estimated</div>
+            <div class="dp-divider"></div>
+            <div class="dp-formula" id="dp-prov-formula">—</div>
+            <div class="dp-pend-banner">
+              <span style="font-size:16px;flex-shrink:0">⏳</span>
+              <p><strong>Not yet approved.</strong> This provincial rebate has not yet been passed into law. The figure shown is an estimate based on the proposed calculation. Do not file or rely on this amount until officially legislated.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOTAL STRIP (shown when "both" or shows just one) -->
+      <div class="total-strip" id="dp-total-strip">
+        <div>
+          <div class="ts-lbl">Combined Estimated Total</div>
+          <div class="ts-note" id="ts-note">Federal (approved) + Provincial (estimated)</div>
+        </div>
+        <div style="text-align:right">
+          <div class="ts-amt" id="dp-total-amt">$0</div>
+          <div class="ts-pend" id="ts-pend-label">⚠️ Includes unlegislated provincial estimate</div>
         </div>
       </div>
     </div>
 
     <!-- WHO GETS WHAT -->
-    <div class="split">
+    <div class="split" style="margin-top:24px">
       <div class="sc">
         <div class="sc-hd"><span class="sc-em">🧾</span><span class="sc-badge" id="you-badge">YOUR REBATE</span></div>
         <div class="sc-who" id="you-who">Your refund from CRA</div>
@@ -605,16 +745,22 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
       <div class="bkt-row has-tip" style="position:relative">
         <span class="bkt-lbl">Federal GST/HST Rebate
           <span class="tip-icon" style="display:inline-flex;vertical-align:middle;margin-left:6px">?</span>
-          <div class="tip-box" style="bottom:auto;top:calc(100% + 8px)">Calculated as 36% of the federal GST/HST paid, capped at $6,300 (5% GST / 13%/15% HST). Reduced on a sliding scale when FMV is $350K–$450K. Zero at $450K+.</div>
+          <div class="tip-box" style="bottom:auto;top:calc(100% + 8px)">Calculated as 36% of the federal GST/HST paid, capped at $6,300 (5% GST / 13%/15% HST). Reduced on a sliding scale when FMV is $350K–$450K. Zero at $450K+. <strong>Approved &amp; in effect.</strong></div>
         </span>
-        <span class="bkt-val" id="bk-fed">$0</span>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+          <span class="bkt-val" id="bk-fed">$0</span>
+          <span style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ok);background:var(--ok-bg);border:1px solid var(--ok-b);padding:2px 8px;border-radius:10px">✅ Approved</span>
+        </div>
       </div>
-      <div class="bkt-row has-tip hidden" id="bk-on-row" style="position:relative">
-        <span class="bkt-lbl">Ontario Provincial Rebate
+      <div class="bkt-row has-tip" id="bk-prov-row" style="position:relative">
+        <span class="bkt-lbl" id="bk-prov-lbl">Provincial HST Rebate (Estimated)
           <span class="tip-icon" style="display:inline-flex;vertical-align:middle;margin-left:6px">?</span>
-          <div class="tip-box" style="bottom:auto;top:calc(100% + 8px)">75% of the provincial part of HST paid (8/13 of total HST), capped at $24,000 if you paid HST on the land, or $16,080 if you did not. Available even when FMV ≥ $450K.</div>
+          <div class="tip-box" style="bottom:auto;top:calc(100% + 8px)" id="bk-prov-tip">Provincial portion of HST rebate — proposed/estimated calculation. Not yet passed into law. Available only in HST provinces (ON, NS, NB, NL, PE).</div>
         </span>
-        <span class="bkt-val" id="bk-on">$0</span>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+          <span class="bkt-val" id="bk-on">$0</span>
+          <span style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--warn);background:var(--warn-bg);border:1px solid var(--warn-b);padding:2px 8px;border-radius:10px">⏳ Not Yet Approved</span>
+        </div>
       </div>
       <div class="bkt-row hidden" id="bk-ns-row">
         <span class="bkt-lbl">Nova Scotia — First-Time Buyers Rebate</span>
@@ -622,7 +768,10 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
       </div>
       <div class="bkt-row bkt-tot">
         <span class="bkt-lbl">Total Estimated Rebate</span>
-        <span class="bkt-val" id="bk-tot">$0</span>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+          <span class="bkt-val" id="bk-tot">$0</span>
+          <span class="bkt-val" id="bk-tot-note" style="font-size:11px;font-weight:500;color:var(--text3)"></span>
+        </div>
       </div>
     </div>
 
@@ -749,31 +898,45 @@ function chk(cbId,lblId){
 }
 const isOn=id=>document.getElementById(id).checked;
 
+/* ── AUTO-COMPUTE GST FROM PRICE ── */
+let gstManual=false;
+function autoGST(){
+  if(gstManual) return;
+  const price=parseFloat(document.getElementById('price').value)||0;
+  const rate=parseFloat(document.getElementById('taxRate').value)||5;
+  const gstEl=document.getElementById('gst');
+  const hint=document.getElementById('gst-hint');
+  if(price>0){
+    const computed=+(price*(rate/100)).toFixed(2);
+    gstEl.value=computed;
+    if(hint) hint.textContent=`Auto-calculated: $${price.toLocaleString('en-CA')} × ${rate}% = $${computed.toLocaleString('en-CA')}`;
+  } else {
+    gstEl.value='';
+    if(hint) hint.textContent='Auto-calculated — or enter exact amount from closing documents';
+  }
+}
+function onGSTManual(){
+  gstManual=document.getElementById('gst').value!=='';
+  if(!gstManual) autoGST();
+}
+
 /* ── PROVINCE DATA ── */
 const PROV={
   ON:{rate:13,label:'Ontario',
-    banner:`<b>Ontario:</b> 13% HST applies (5% federal + 8% provincial). You may claim both a <b>federal rebate</b> (up to $6,300) and an <b>Ontario Provincial Rebate</b> (up to $24,000). The Ontario rebate is available even when FMV ≥ $450,000.`,type:'ok',lhst:true,bc:true},
+    banner:`<b>Ontario:</b> 13% HST (5% federal + 8% provincial). Federal rebate: RC4028 up to $6,300 | Bill C-4 up to $50,000 (first-time buyers). Ontario Provincial Rebate: up to $24,000 (existing law).`,type:'ok',lhst:true,bc:true},
   NS:{rate:15,label:'Nova Scotia',
-    banner:`<b>Nova Scotia:</b> 15% HST applies (5% federal + 10% provincial). Only the federal portion qualifies for the CRA rebate. A <b>First-Time Home Buyers Rebate</b> may be available — claim it separately with <b>Service Nova Scotia</b>.`,type:'warn',ns:true,bc:true},
-  NB:{rate:15,label:'New Brunswick',
-    banner:`<b>New Brunswick:</b> 15% HST applies. Only the federal portion (5/15 of HST paid) qualifies for the CRA rebate. No separate provincial rebate.`,type:'info',bc:true},
-  NL:{rate:15,label:'Newfoundland & Labrador',
-    banner:`<b>Newfoundland and Labrador:</b> 15% HST applies. Only the federal portion qualifies for the CRA rebate. No separate provincial rebate.`,type:'info',bc:true},
-  PE:{rate:15,label:'Prince Edward Island',
-    banner:`<b>Prince Edward Island:</b> 15% HST applies. Only the federal portion qualifies for the CRA rebate. No separate provincial rebate.`,type:'info',bc:true},
-  BC:{rate:5,label:'British Columbia',
-    banner:`<b>British Columbia:</b> 5% GST applies (no HST). Only the federal GST rebate applies through CRA. Contact the BC Ministry of Finance for any applicable provincial programs.`,type:'info',bc:true},
-  AB:{rate:5,label:'Alberta',
-    banner:`<b>Alberta:</b> 5% GST — no provincial sales tax. Only the federal GST rebate applies.`,type:'info',bc:true},
-  SK:{rate:5,label:'Saskatchewan',
-    banner:`<b>Saskatchewan:</b> 5% GST applies. No provincial new housing rebate through CRA.`,type:'info',bc:true},
-  MB:{rate:5,label:'Manitoba',
-    banner:`<b>Manitoba:</b> 5% GST applies. No provincial new housing rebate through CRA.`,type:'info',bc:true},
-  QC:{rate:5,label:'Quebec',
-    banner:`<b>Quebec:</b> In Quebec, <b>Revenu Québec</b> — not the CRA — administers the GST/HST. Use Revenu Québec forms and call <b>1-800-567-4692</b>. A separate QST (Quebec Sales Tax) new housing rebate may also be available.`,type:'warn',bc:true},
-  YT:{rate:5,label:'Yukon',banner:`<b>Yukon:</b> 5% GST applies. Only the federal GST rebate applies.`,type:'info'},
-  NT:{rate:5,label:'Northwest Territories',banner:`<b>Northwest Territories:</b> 5% GST applies. Only the federal GST rebate applies.`,type:'info'},
-  NU:{rate:5,label:'Nunavut',banner:`<b>Nunavut:</b> 5% GST applies. Only the federal GST rebate applies.`,type:'info'},
+    banner:`<b>Nova Scotia:</b> 15% HST (5% federal + 10% provincial). Federal rebate via CRA. Separate First-Time Home Buyers Rebate — claim with <b>Service Nova Scotia</b>.`,type:'warn',ns:true,bc:true},
+  NB:{rate:15,label:'New Brunswick',banner:`<b>New Brunswick:</b> 15% HST. Federal portion (5/15) qualifies for CRA rebate.`,type:'info',bc:true},
+  NL:{rate:15,label:'Newfoundland & Labrador',banner:`<b>Newfoundland and Labrador:</b> 15% HST. Federal portion qualifies for CRA rebate.`,type:'info',bc:true},
+  PE:{rate:15,label:'Prince Edward Island',banner:`<b>Prince Edward Island:</b> 15% HST. Federal portion qualifies for CRA rebate.`,type:'info',bc:true},
+  BC:{rate:5,label:'British Columbia',banner:`<b>British Columbia:</b> 5% GST (no HST). Only the federal GST rebate applies.`,type:'info',bc:true},
+  AB:{rate:5,label:'Alberta',banner:`<b>Alberta:</b> 5% GST, no provincial sales tax. Only the federal GST rebate applies.`,type:'info',bc:true},
+  SK:{rate:5,label:'Saskatchewan',banner:`<b>Saskatchewan:</b> 5% GST. No provincial new housing rebate through CRA.`,type:'info',bc:true},
+  MB:{rate:5,label:'Manitoba',banner:`<b>Manitoba:</b> 5% GST. No provincial new housing rebate through CRA.`,type:'info',bc:true},
+  QC:{rate:5,label:'Quebec',banner:`<b>Quebec:</b> <b>Revenu Québec</b> administers GST/HST — not CRA. Call <b>1-800-567-4692</b>. A QST rebate may also apply.`,type:'warn',bc:true},
+  YT:{rate:5,label:'Yukon',banner:`<b>Yukon:</b> 5% GST. Only the federal rebate applies.`,type:'info'},
+  NT:{rate:5,label:'Northwest Territories',banner:`<b>Northwest Territories:</b> 5% GST. Only the federal rebate applies.`,type:'info'},
+  NU:{rate:5,label:'Nunavut',banner:`<b>Nunavut:</b> 5% GST. Only the federal rebate applies.`,type:'info'},
 };
 
 function onProv(){
@@ -788,6 +951,7 @@ function onProv(){
   if(c.bc)   document.getElementById('grp-bc').classList.remove('hidden');
   if(c.ns)   document.getElementById('grp-ns').classList.remove('hidden');
   document.getElementById('s2title').textContent=`Financial Details — ${c.label}`;
+  gstManual=false; autoGST();
 }
 
 document.querySelectorAll('input[name="pr"]').forEach(r=>
@@ -797,80 +961,262 @@ document.querySelectorAll('input[name="pr"]').forEach(r=>
 );
 
 /* ── FORMAT ── */
-const fmt=n=>n<=0?'$0':'$'+Math.round(n).toLocaleString('en-CA');
+const fmt=n=>(n==null||n<=0)?'$0':'$'+Math.round(n).toLocaleString('en-CA');
 
-/* ── CALCULATE ── */
+/* ── REBATE TYPE SELECTOR ── */
+function selectRT(val){
+  ['federal','provincial','both'].forEach(v=>{
+    const lbl=document.getElementById('rt-'+v+'-lbl');
+    const c=document.getElementById('rtc-'+v);
+    if(lbl){lbl.classList.remove('on');if(v===val)lbl.classList.add('on');}
+    if(c){c.textContent=v===val?'✓':'';}
+  });
+  const rb=document.getElementById('rt-'+val);
+  if(rb) rb.checked=true;
+}
+
+/* ══════════════════════════════════════════════════
+   CALCULATION ENGINE — verified against RC4028 & Bill C-4
+   ══════════════════════════════════════════════════
+
+   PROGRAM 1 — RC4028 (current law, all buyers):
+     Federal paid  = totalTax × (5 / rate)
+     Base rebate   = min(fedPaid × 36%, $6,300)
+     FMV ≥ $450K  → $0
+     FMV $350–450K → base × (450,000 − FMV) / 100,000
+     FMV ≤ $350K  → full base
+
+   PROGRAM 2 — Bill C-4 (first-time buyers, pending Royal Assent):
+     Rebate = full refund of federal portion paid
+     FMV ≤ $1M    → full refund (max $50,000 on $1M home at 5%)
+     FMV $1M–$1.5M → rebate × (1,500,000 − FMV) / 500,000
+     FMV > $1.5M  → $0
+
+   PROVINCIAL (existing law):
+     Ontario: min(provPaid × 75%, $24,000 or $16,080)
+       provPaid = totalTax × 8/13
+     No current provincial law for NS/NB/NL/PE beyond federal rebate.
+
+   PROVINCIAL PROPOSED (not yet law — estimation only):
+     Full refund of provincial HST portion on homes ≤ $1M
+     ON:  totalTax × 8/13  (same phase-out as C-4)
+     Others: totalTax × 10/15
+   ══════════════════════════════════════════════════ */
+
+const HST_PROV=['ON','NS','NB','NL','PE'];
+
+function calcRC4028(totalTax, rate, fmv){
+  const fedPaid = totalTax * (5/rate);
+  const base    = Math.min(fedPaid * 0.36, 6300);
+  let rebate=0, note='';
+  if(fmv >= 450000){
+    rebate=0;
+    note=`FMV $${fmv.toLocaleString('en-CA')} ≥ $450,000 — RC4028 federal rebate = $0`;
+  } else if(fmv > 350000){
+    const f=(450000-fmv)/100000;
+    rebate=base*f;
+    note=`Phase-out: $${base.toFixed(0)} × (450,000−${fmv.toLocaleString('en-CA')})/100,000 = ${fmt(rebate)}`;
+  } else {
+    rebate=base;
+    note=`36% × $${fedPaid.toFixed(2)} federal paid = $${(fedPaid*0.36).toFixed(2)}, capped at $6,300 → ${fmt(rebate)}`;
+  }
+  return {rebate, fedPaid, note};
+}
+
+function calcC4(totalTax, rate, fmv){
+  // Full refund of the 5% federal portion
+  const fedPaid = totalTax * (5/rate);
+  let rebate=0, note='';
+  if(fmv > 1500000){
+    rebate=0;
+    note=`FMV $${fmv.toLocaleString('en-CA')} > $1,500,000 — Bill C-4 rebate = $0`;
+  } else if(fmv > 1000000){
+    const f=(1500000-fmv)/500000;
+    rebate=fedPaid*f;
+    note=`Partial: $${fedPaid.toFixed(2)} × (1,500,000−${fmv.toLocaleString('en-CA')})/500,000 = ${fmt(rebate)}`;
+  } else {
+    rebate=fedPaid;
+    note=`Full refund of 5% federal portion = ${fmt(rebate)} (5% of total HST paid)`;
+  }
+  return {rebate, fedPaid, note};
+}
+
+function calcOntarioExisting(totalTax, lhstPaid){
+  // Current law — available regardless of FMV
+  const provPaid = totalTax*(8/13);
+  const cap      = lhstPaid ? 24000 : 16080;
+  const rebate   = Math.min(provPaid*0.75, cap);
+  const note=`75% × $${provPaid.toFixed(2)} prov. portion = $${(provPaid*0.75).toFixed(2)}, capped at ${fmt(cap)}`;
+  return {rebate, provPaid, note};
+}
+
+function calcProvProposed(totalTax, rate, fmv, prov){
+  // Proposed — NOT YET LAW. Full refund of provincial portion, same C-4 phase-out.
+  let provPaid=0, label='';
+  if(prov==='ON' && rate===13){
+    provPaid=totalTax*(8/13); label='Ontario 8% prov. HST';
+  } else if(['NS','NB','NL','PE'].includes(prov) && rate===15){
+    provPaid=totalTax*(10/15); label=`${prov} 10% prov. HST`;
+  }
+  if(!provPaid) return {rebate:0, provPaid:0, note:'No provincial HST applies here'};
+  let rebate=0, note='';
+  if(fmv>1500000){rebate=0;note='FMV > $1.5M — proposed prov. rebate = $0';}
+  else if(fmv>1000000){const f=(1500000-fmv)/500000;rebate=provPaid*f;note=`Partial: ${fmt(provPaid)} × factor = ${fmt(rebate)}`;}
+  else{rebate=provPaid;note=`Full refund of ${label} = ${fmt(rebate)}`;}
+  return {rebate, provPaid, note};
+}
+
+/* ── MAIN CALCULATE ── */
 function calculate(){
-  const ht=document.querySelector('input[name="ht"]:checked')?.value;
-  const prov=document.getElementById('province').value;
-  const pr=document.querySelector('input[name="pr"]:checked')?.value;
-  const rate=parseFloat(document.getElementById('taxRate').value||0);
-  const fmv=parseFloat(document.getElementById('fmv').value)||0;
-  const gst=parseFloat(document.getElementById('gst').value)||0;
-  const lhst=isOn('cb-lhst'),bc=isOn('cb-bc');
+  const ht   =document.querySelector('input[name="ht"]:checked')?.value;
+  const prov =document.getElementById('province').value;
+  const pr   =document.querySelector('input[name="pr"]:checked')?.value;
+  const ftb  =document.querySelector('input[name="ftb"]:checked')?.value;
+  const rate =parseFloat(document.getElementById('taxRate').value)||5;
+  const price=parseFloat(document.getElementById('price').value)||0;
+  const fmv  =parseFloat(document.getElementById('fmv').value)||0;
+  const gstIn=parseFloat(document.getElementById('gst').value)||0;
+  const lhst =isOn('cb-lhst'), bc=isOn('cb-bc');
+  const rtVal=document.querySelector('input[name="rt"]:checked')?.value||'both';
 
   if(!ht)       {alert('Please select a home type in Step 1.');return;}
   if(!prov)     {alert('Please select a province in Step 1.');return;}
   if(!pr)       {alert('Please indicate primary residence status.');return;}
-  if(pr==='no') {alert('This rebate is only available for a primary residence.');return;}
-  if(!rate)     {alert('Please select the GST/HST rate.');return;}
+  if(pr==='no') {alert('This rebate requires a primary residence.');return;}
   if(fmv<=0)    {alert('Please enter the Fair Market Value (FMV).');return;}
-  if(gst<=0)    {alert('Please enter the total GST/HST paid.');return;}
+  if(price<=0 && gstIn<=0){alert('Please enter a purchase price or total GST/HST paid.');return;}
 
-  /* Federal */
-  let fedPaid=gst;
-  if(rate===13) fedPaid=gst*(5/13);
-  if(rate===15) fedPaid=gst*(5/15);
-  const maxFed=(rate===6||rate===14)?7560:(rate===7?8750:6300);
-  let base=Math.min(fedPaid*0.36,maxFed);
-  let fedR=0,high=false,warn=false;
-  if(fmv>=450000){fedR=0;high=true;}
-  else if(fmv>350000){fedR=base*(450000-fmv)/100000;warn=true;}
-  else{fedR=base;}
+  // Determine total tax and purchase price
+  const totalTax  = gstIn>0 ? gstIn : +(price*(rate/100)).toFixed(2);
+  const purchPrice= price>0 ? price  : +(totalTax/(rate/100)).toFixed(2);
 
-  /* Ontario */
-  let onR=0;
-  if(prov==='ON'&&rate===13){
-    onR=Math.min(gst*(8/13)*0.75,lhst?24000:16080);
+  // ── Run all four calculations ──
+  const rc4028   = calcRC4028(totalTax, rate, fmv);
+  const isC4     = ftb==='yes';   // Bill C-4 requires first-time buyer
+  const c4       = isC4 ? calcC4(totalTax, rate, fmv) : {rebate:0, fedPaid:0, note:'Bill C-4 requires first-time buyer status'};
+  const hasHST   = HST_PROV.includes(prov);
+  const onExist  = (prov==='ON' && rate===13) ? calcOntarioExisting(totalTax, lhst) : {rebate:0, note:'N/A'};
+  const provProp = hasHST ? calcProvProposed(totalTax, rate, fmv, prov) : {rebate:0, note:'No provincial HST'};
+
+  // Best federal rebate (current law = RC4028; future if C-4 passes = c4)
+  const bestFedNow    = rc4028.rebate;
+  const bestFedFuture = isC4 ? Math.max(rc4028.rebate, c4.rebate) : rc4028.rebate;
+
+  // Phase flags
+  const high = fmv>=450000 && rc4028.rebate===0;
+  const warn = fmv>350000  && fmv<450000;
+
+  // ── Render results ──
+  document.getElementById('results').classList.remove('hidden');
+  document.getElementById('al-high').classList.toggle('hidden',!high||isC4&&c4.rebate>0);
+  document.getElementById('al-warn').classList.toggle('hidden',!warn);
+
+  // ── Dual panel layout ──
+  const dpBoth=document.getElementById('dp-both');
+  const fedPane =dpBoth.querySelector('.dp-fed');
+  const provPane=dpBoth.querySelector('.dp-prov');
+
+  const showFed =rtVal==='federal'||rtVal==='both';
+  const showProv=hasHST&&(rtVal==='provincial'||rtVal==='both');
+
+  fedPane.style.display =showFed?'':'none';
+  provPane.style.display=showProv?'':'none';
+  dpBoth.style.gridTemplateColumns=(showFed&&showProv)?'':'1fr';
+
+  // Federal panel content
+  if(showFed){
+    const showC4=isC4&&c4.rebate>0;
+    const fedAmt=showC4?Math.max(rc4028.rebate,c4.rebate):rc4028.rebate;
+    document.getElementById('dp-fed-amt').textContent=fmt(fedAmt);
+    document.getElementById('dp-fed-sub').textContent=
+      showC4&&c4.rebate>rc4028.rebate
+        ?`Bill C-4 first-time buyer rebate (pending Royal Assent)`
+        :`RC4028 standard federal rebate`;
+    document.getElementById('dp-fed-formula').textContent=
+      showC4&&c4.rebate>rc4028.rebate ? c4.note : rc4028.note;
   }
-  const total=fedR+onR;
 
-  /* Split */
+  // Provincial panel content
+  if(showProv){
+    const provTotal=onExist.rebate+provProp.rebate;
+    document.getElementById('dp-prov-amt').textContent=fmt(provTotal);
+    document.getElementById('dp-prov-sub').textContent=
+      onExist.rebate>0
+        ?`${fmt(onExist.rebate)} existing law + ${fmt(provProp.rebate)} proposed`
+        :`${fmt(provProp.rebate)} proposed (not yet law)`;
+    document.getElementById('dp-prov-formula').textContent=
+      onExist.rebate>0
+        ?`Existing: ${onExist.note} | Proposed: ${provProp.note}`
+        :provProp.note;
+  }
+
+  // Total strip
+  const displayFed =showFed ?(isC4?Math.max(rc4028.rebate,c4.rebate):rc4028.rebate):0;
+  const displayProv=showProv?(onExist.rebate+provProp.rebate):0;
+  const grandDisplay=displayFed+displayProv;
+  document.getElementById('dp-total-amt').textContent=fmt(grandDisplay);
+  const hasPending=(isC4&&c4.rebate>0)||provProp.rebate>0;
+  document.getElementById('ts-pend-label').classList.toggle('hidden',!hasPending||rtVal==='federal'||!hasHST);
+  document.getElementById('ts-note').textContent=
+    (!hasHST||rtVal==='federal') ?'Federal rebate (RC4028 current law)':
+    rtVal==='provincial'?'Provincial rebate (existing + proposed estimate)':
+    'Federal + Provincial combined';
+
+  // ── Breakdown table ──
+  document.getElementById('bk-fed').textContent=fmt(rc4028.rebate);
+
+  // C-4 row (insert once if not present)
+  let c4Row=document.getElementById('bk-c4-row');
+  if(!c4Row){
+    c4Row=document.createElement('div');
+    c4Row.id='bk-c4-row';c4Row.className='bkt-row has-tip';c4Row.style.cssText='position:relative';
+    c4Row.innerHTML=`<span class="bkt-lbl" style="display:flex;align-items:center;gap:6px">Bill C-4 Federal Rebate<span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;color:var(--warn);background:var(--warn-bg);border:1px solid var(--warn-b)">⏳ Pending Royal Assent</span></span><span class="bkt-val" id="bk-c4-val">—</span>`;
+    document.querySelector('.bkt-row.bkt-tot').before(c4Row);
+  }
+  if(isC4){c4Row.classList.remove('hidden');document.getElementById('bk-c4-val').textContent=fmt(c4.rebate);}
+  else{c4Row.classList.add('hidden');}
+
+  // Provincial row
+  const provRowLbl=prov==='ON'?'Ontario Provincial Rebate':hasHST?`${PROV[prov]?.label} Provincial Rebate`:'Provincial Rebate';
+  document.getElementById('bk-prov-lbl').firstChild.textContent=provRowLbl+' ';
+  document.getElementById('bk-on').textContent=fmt(onExist.rebate+provProp.rebate);
+  document.getElementById('bk-prov-row').classList.toggle('hidden',!hasHST);
+  document.getElementById('bk-ns-row').classList.toggle('hidden',prov!=='NS');
+
+  // Grand total row
+  const grandTotal=(isC4?Math.max(rc4028.rebate,c4.rebate):rc4028.rebate)+onExist.rebate+provProp.rebate;
+  document.getElementById('bk-tot').textContent=fmt(grandTotal);
+  document.getElementById('bk-tot-note').textContent=
+    `RC4028: ${fmt(rc4028.rebate)}`+
+    (isC4?` | C-4: ${fmt(c4.rebate)}`:'') +
+    (hasHST?` | Prov. existing: ${fmt(onExist.rebate)} | Prov. proposed: ${fmt(provProp.rebate)}`:'');
+
+  // ── Who Gets What (split cards — based on current law only) ──
+  const totalNow=bestFedNow+onExist.rebate;
   let yA,yW,yS,yN,bA,bW,bS,bN;
   if(ht==='purchased'){
     if(bc){
-      yA=total;yW='You received at closing';yS='Credited as a reduction to your purchase price';
-      yN='The builder reduced your purchase price by the full rebate at closing. You already received this benefit — no separate CRA application needed.';
-      bA=0;bW='Builder files with CRA';bS='Builder recovers rebate from CRA on your behalf';
-      bN='The builder submits Form GST190 (Type 1A/1B) to CRA and recoups the amount. Both you and the builder are liable for overpayments.';
+      yA=totalNow;yW='You received at closing';yS='Credited as a purchase price reduction';
+      yN=`Builder reduced your price by ${fmt(totalNow)} at closing and files GST190 with CRA. Once Bill C-4 and any provincial rebate pass, file separately for the additional amount.`;
+      bA=0;bW='Builder files GST190 with CRA';bS='Builder recovers rebate from CRA';
+      bN='Builder submits Form GST190 (Type 1A/1B). Both parties liable for overpayments.';
     } else {
-      yA=total;yW='You receive from CRA';yS='CRA issues a cheque or direct deposit';
-      yN='File Form GST190 (Type 2 or 5) directly with CRA within 2 years of ownership transfer. Include your Statement of Adjustments.';
-      bA=0;bW='Builder — no rebate credited';bS='You apply directly to CRA';
-      bN='The builder did not credit the rebate at closing. You are the claimant and file Application Type 2 (house + land) or Type 5 (house + leased land).';
+      yA=totalNow;yW='You claim directly from CRA';yS='CRA issues a cheque or direct deposit';
+      yN=`File GST190 within 2 years of ownership transfer for the ${fmt(totalNow)} current-law rebate. File separately for Bill C-4 once Royal Assent is granted.`;
+      bA=0;bW='No builder involvement';bS='You apply to CRA directly';
+      bN='File GST190 Type 2 (house + land) or Type 5 (house + leased land). Attach Statement of Adjustments.';
     }
   } else if(ht==='owner-built'){
-    yA=total;yW='You receive from CRA';yS='CRA issues a cheque or direct deposit';
-    yN='For owner-built homes you are always the claimant. File Form GST191 + GST191-WS directly with CRA. Contractors you hired cannot pay or credit the rebate.';
-    bA=0;bW='Not applicable';bS='No builder rebate involvement';
-    bN='Contractors you hired to build your home cannot claim or credit the rebate. As the homeowner-builder, you apply using Form GST191.';
+    yA=totalNow;yW='You receive directly from CRA';yS='CRA issues a cheque or direct deposit';
+    yN='File GST191 + GST191-WS. Contractors cannot claim or credit the rebate on your behalf.';
+    bA=0;bW='Not applicable';bS='Owner-built — you always apply';
+    bN='As homeowner-builder, you are always the claimant. No builder involvement.';
   } else {
-    yA=total;yW='You receive from CRA';yS='CRA issues a cheque or direct deposit';
-    yN='For substantially renovated homes, file Form GST191 + GST191-WS. The renovation must gut 90%+ of the interior. Keep all invoices for 6+ years.';
+    yA=totalNow;yW='You receive directly from CRA';yS='CRA issues a cheque or direct deposit';
+    yN='File GST191 + GST191-WS. Must have removed/replaced 90%+ of interior. Keep all invoices.';
     bA=0;bW='Not applicable';bS='Renovation — you file directly';
-    bN='Contractors hired for your renovation cannot pay or credit the rebate. You apply as the homeowner. Substantial renovation = 90%+ of interior removed or replaced.';
+    bN='Substantial renovation = 90%+ of interior removed/replaced (excluding foundation, exterior walls, roof).';
   }
-
-  /* Render */
-  document.getElementById('results').classList.remove('hidden');
-  document.getElementById('al-high').classList.toggle('hidden',!high);
-  document.getElementById('al-warn').classList.toggle('hidden',!warn);
-  document.getElementById('rh-num').textContent=fmt(total);
-  document.getElementById('rh-sub').textContent=
-    prov==='ON'?'Federal Rebate + Ontario Provincial Rebate':
-    prov==='NS'?'Federal Rebate (NS First-Time Buyers Rebate claimed separately)':
-    prov==='QC'?'Estimated — file via Revenu Québec':'Federal GST/HST Rebate';
-
   document.getElementById('you-who').textContent=yW;
   document.getElementById('you-amt').textContent=fmt(yA);
   document.getElementById('you-sub').textContent=yS;
@@ -880,13 +1226,7 @@ function calculate(){
   document.getElementById('bld-sub').textContent=bS;
   document.getElementById('bld-note').textContent=bN;
 
-  document.getElementById('bk-fed').textContent=fmt(fedR);
-  document.getElementById('bk-on-row').classList.toggle('hidden',prov!=='ON');
-  document.getElementById('bk-on').textContent=fmt(onR);
-  document.getElementById('bk-ns-row').classList.toggle('hidden',prov!=='NS');
-  document.getElementById('bk-tot').textContent=fmt(total);
-
-  /* Step progression */
+  // Step indicators
   const s2=document.getElementById('s2'),s3=document.getElementById('s3');
   s2.classList.remove('active');s2.classList.add('done');s2.querySelector('.step-ring').textContent='✓';
   s3.classList.add('active');
@@ -899,50 +1239,45 @@ function calculate(){
 const ft=t=>`<span class="ftag">📄 ${t}</span>`;
 function buildFiling(ht,prov,bc){
   const ON=prov==='ON',NS=prov==='NS',QC=prov==='QC';
-  const nsW=NS?`<p style="margin-top:12px;color:var(--warn)">⚠️ <b>NS First-Time Home Buyers Rebate</b> — claim separately with <b>Service Nova Scotia</b>, not through CRA.</p>`:'';
+  const nsW=NS?`<p style="margin-top:12px;color:var(--warn)">⚠️ <b>NS First-Time Home Buyers Rebate</b> — claim separately with <b>Service Nova Scotia</b>, not CRA.</p>`:'';
   const qcW=QC?`<p style="margin-top:12px;color:var(--warn)">⚠️ In Quebec, file with <b>Revenu Québec</b> (not CRA) — call <b>1-800-567-4692</b>.</p>`:'';
-  const srcL=`<p style="margin-top:14px;font-size:13px;color:var(--text3)">📚 Official guidance: <a href="https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/rc4028.html" target="_blank">CRA Guide RC4028</a> · <a href="https://www.parl.ca/legisinfo/en/bill/45-1/c-4" target="_blank">Bill C-4 (45-1)</a></p>`;
-  const onA=`<div class="addr-box"><strong>Sudbury Tax Centre</strong><br>1050 Notre Dame Avenue, Sudbury ON&nbsp;&nbsp;P3A 5C1</div>`;
-  const peA=`<div class="addr-box"><strong>Prince Edward Island Tax Centre</strong><br>275 Pope Road, Summerside PE&nbsp;&nbsp;C1N 6A2</div>`;
+  const srcL=`<p style="margin-top:14px;font-size:13px;color:var(--text3)">📚 <a href="https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/rc4028.html" target="_blank">CRA Guide RC4028</a> · <a href="https://www.parl.ca/legisinfo/en/bill/45-1/c-4" target="_blank">Bill C-4 (45-1)</a></p>`;
+  const onA=`<div class="addr-box"><strong>Sudbury Tax Centre</strong><br>1050 Notre Dame Avenue, Sudbury ON P3A 5C1</div>`;
+  const peA=`<div class="addr-box"><strong>Prince Edward Island Tax Centre</strong><br>275 Pope Road, Summerside PE C1N 6A2</div>`;
   const onL=`<p style="margin-top:10px">📱 <strong>File online:</strong> <a href="https://www.canada.ca/en/revenue-agency/services/e-services/digital-services-individuals/account-individuals.html" target="_blank"><strong>CRA My Account</strong></a></p>`;
-
   if(ht==='owner-built'||ht==='reno'){
     const lbl=ht==='reno'?'a substantially renovated home':'an owner-built home';
-    return `<p>For <strong>${lbl}</strong>, you file the rebate yourself directly with CRA.</p>
-<p style="margin-top:14px"><strong>Required forms:</strong></p>
-<p style="margin-top:6px">${ft('Form GST191-WS')} <em>Construction Summary Worksheet</em> — complete first, listing every GST/HST invoice from construction.</p>
-<p style="margin-top:6px">${ft('Form GST191')} <em>New Housing Rebate Application for Owner-Built Houses</em> — calculates your rebate.</p>
-${ON?`<p style="margin-top:6px">${ft('Form RC7191-ON')} <em>GST191 Ontario Rebate Schedule</em> — attach to claim the Ontario provincial rebate.</p>`:''}
+    return `<p>For <strong>${lbl}</strong>, you file directly with CRA.</p>
+<p style="margin-top:12px"><strong>Required forms:</strong></p>
+<p style="margin-top:6px">${ft('GST191-WS')} Construction Summary Worksheet — complete first, listing all GST/HST invoices.</p>
+<p style="margin-top:6px">${ft('GST191')} New Housing Rebate Application for Owner-Built Houses.</p>
+${ON?`<p style="margin-top:6px">${ft('RC7191-ON')} Ontario Rebate Schedule — attach for the provincial rebate.</p>`:''}
 <div class="div"></div>
-<p><strong>Filing deadline:</strong> Up to <strong>2 years</strong> from your base date — date of substantial completion or first occupancy, whichever is earlier.</p>
-${onL}
-<p style="margin-top:10px">📮 <strong>Or mail to:</strong></p>${ON?onA:peA}
-${nsW}${qcW}${srcL}`;
+<p><strong>Deadline:</strong> 2 years from substantial completion or first occupancy, whichever is earlier.</p>
+${onL}<p style="margin-top:10px">📮 <strong>Mail to:</strong></p>${ON?onA:peA}${nsW}${qcW}${srcL}`;
   }
   if(bc){
-    return `<p>Since the <strong>builder credited the rebate at closing</strong>, this is straightforward for you.</p>
-<p style="margin-top:12px"><strong>What you sign at closing:</strong></p>
-<p>${ft('Form GST190')} — you sign; the builder sends it to CRA.${ON?`  Also sign ${ft('Form RC7190-ON')} <em>Ontario Rebate Schedule</em>.`:''}</p>
-<p style="margin-top:10px;font-weight:700;color:var(--accent)">✅ You do <em>not</em> mail anything to CRA — the builder files on your behalf.</p>
-<p style="margin-top:10px"><strong>Builder's responsibility:</strong> Submits your signed Form GST190 to CRA and recovers the rebate. Both parties are liable for any overpayments.</p>
-<p style="margin-top:10px">📁 Keep copies of all closing documents for at least <strong>6 years</strong>.</p>
+    return `<p>The <strong>builder credited the rebate at closing</strong> — you have already received this benefit.</p>
+<p style="margin-top:10px"><strong>What you signed:</strong> ${ft('GST190')} — builder sends to CRA.${ON?` Also ${ft('RC7190-ON')} Ontario Rebate Schedule.`:''}</p>
+<p style="margin-top:10px;font-weight:700;color:var(--accent)">✅ No further CRA filing needed for the current-law rebate.</p>
+<p style="margin-top:10px">📁 Keep all closing documents 6+ years.</p>
+<p style="margin-top:10px">When Bill C-4 receives Royal Assent, CRA will publish how first-time buyers can claim the additional amount.</p>
 ${nsW}${qcW}${srcL}`;
   }
   return `<p>Since the <strong>builder did not credit the rebate</strong>, you file directly with CRA.</p>
-<p style="margin-top:12px"><strong>Required forms and documents:</strong></p>
-<p>${ft('Form RC7190-WS')} <em>GST190 Calculation Worksheet</em> — keep for your records, do not mail to CRA.</p>
-<p style="margin-top:6px">${ft('Form GST190')} <em>New Housing Rebate Application for Houses Purchased from a Builder</em> — use <strong>Type 2</strong> (house + land) or <strong>Type 5</strong> (house + leased land).</p>
-${ON?`<p style="margin-top:6px">${ft('Form RC7190-ON')} <em>GST190 Ontario Rebate Schedule</em> — attach for the Ontario rebate.</p>`:''}
-<p style="margin-top:6px">📎 Include a copy of your <strong>Statement of Adjustments</strong>.</p>
+<p style="margin-top:12px"><strong>Required forms:</strong></p>
+<p style="margin-top:6px">${ft('RC7190-WS')} GST190 Calculation Worksheet — keep for records, do not mail.</p>
+<p style="margin-top:6px">${ft('GST190')} New Housing Rebate Application — <strong>Type 2</strong> (house + land) or <strong>Type 5</strong> (house + leased land).</p>
+${ON?`<p style="margin-top:6px">${ft('RC7190-ON')} Ontario Rebate Schedule — attach for the provincial rebate.</p>`:''}
+<p style="margin-top:6px">📎 Attach your <strong>Statement of Adjustments</strong>.</p>
 <div class="div"></div>
-<p><strong>Filing deadline:</strong> Up to <strong>2 years</strong> from the date ownership was transferred to you.</p>
-${onL}
-<p style="margin-top:10px">📮 <strong>Or mail to:</strong></p>${ON?onA:peA}
-${nsW}${qcW}${srcL}`;
+<p><strong>Deadline:</strong> 2 years from the date ownership transferred to you.</p>
+${onL}<p style="margin-top:10px">📮 <strong>Mail to:</strong></p>${ON?onA:peA}${nsW}${qcW}${srcL}`;
 }
 
 /* ── RESET ── */
 function resetForm(){
+  gstManual=false;
   document.querySelectorAll('input[type=radio]').forEach(r=>r.checked=false);
   document.querySelectorAll('input[type=number]').forEach(i=>i.value='');
   ['cb-lhst','cb-bc'].forEach(id=>{const e=document.getElementById(id);if(e)e.checked=false;});
@@ -954,6 +1289,12 @@ function resetForm(){
   document.getElementById('results').classList.add('hidden');
   document.getElementById('al-pr').classList.add('hidden');
   ['al-high','al-warn'].forEach(id=>document.getElementById(id).classList.add('hidden'));
+  const hint=document.getElementById('gst-hint');
+  if(hint) hint.textContent='Auto-calculated — or enter exact amount from closing documents';
+  selectRT('federal');
+  document.getElementById('rt-fed').checked=true;
+  const dpBoth=document.getElementById('dp-both');
+  if(dpBoth){dpBoth.style.gridTemplateColumns='';dpBoth.querySelector('.dp-fed').style.display='';dpBoth.querySelector('.dp-prov').style.display='';}
   const s2=document.getElementById('s2'),s3=document.getElementById('s3');
   s2.classList.remove('done');s2.classList.add('active');s2.querySelector('.step-ring').textContent='2';
   s3.classList.remove('active','done');s3.querySelector('.step-ring').textContent='3';
